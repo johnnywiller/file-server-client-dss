@@ -1,7 +1,12 @@
 package br.furb.dss;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.security.KeyFactory;
 import java.security.KeyPair;
 import java.security.MessageDigest;
+import java.security.spec.X509EncodedKeySpec;
 import java.util.Arrays;
 
 import javax.crypto.interfaces.DHPrivateKey;
@@ -31,7 +36,7 @@ public class ClientSessionInitiation {
 		System.out.println("STARTING SESSION (Kex process)");
 
 		byte[] pubKey = getServerPubKey();
-		
+
 		DHPublicKey publicKey;
 		KeyPair keyPair;
 		byte[] secret;
@@ -68,11 +73,13 @@ public class ClientSessionInitiation {
 		return keys;
 	}
 
-	private byte[] getServerPubKey() {
+	private byte[] getServerPubKey() throws Exception {
 
-		
-		
-		return null;
+		byte[] keyBytes = Files.readAllBytes(Paths.get("/home/blacksheep/git/file-server-client-dss/FileServerClientDSS/pub_key/public_key.der"));
+
+		X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
+		KeyFactory kf = KeyFactory.getInstance("RSA");
+		return kf.generatePublic(spec).getEncoded();
 	}
 
 }
