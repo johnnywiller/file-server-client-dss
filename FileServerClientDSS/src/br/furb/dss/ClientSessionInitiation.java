@@ -75,7 +75,7 @@ public class ClientSessionInitiation {
 
 	private byte[] getServerPubKey() throws Exception {
 
-		byte[] keyBytes = Files.readAllBytes(Paths.get("/home/blacksheep/git/file-server-client-dss/FileServerClientDSS/pub_key/public_key.der"));
+		byte[] keyBytes = Files.readAllBytes(Paths.get("pub_key/public_key.der"));
 
 		X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
 		KeyFactory kf = KeyFactory.getInstance("RSA");

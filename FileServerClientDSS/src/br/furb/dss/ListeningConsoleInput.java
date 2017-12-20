@@ -28,7 +28,7 @@ public class ListeningConsoleInput extends Thread {
 		while (true) {
 
 			String read = sc.nextLine();
-
+			
 			EncryptedMessage msg = encryptor.encryptMessage(read);
 
 			server.getOut().writeObject(msg);
