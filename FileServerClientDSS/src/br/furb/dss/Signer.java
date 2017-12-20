@@ -2,7 +2,6 @@ package br.furb.dss;
 
 import java.security.KeyFactory;
 import java.security.KeyPair;
-import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.security.Signature;
@@ -15,10 +14,6 @@ public class Signer {
 	// private byte[]
 
 	private Signer() throws NoSuchAlgorithmException {
-
-		KeyPairGenerator keyGen = KeyPairGenerator.getInstance("RSA");
-		keyGen.initialize(2048);
-		this.pair = keyGen.genKeyPair();
 
 	}
 
@@ -34,19 +29,7 @@ public class Signer {
 		return instance;
 	}
 
-	public byte[] getPublicKey() {
-		return pair.getPublic().getEncoded();
-	}
 
-	public byte[] sign(byte[] plainText) throws Exception {
-		Signature privateSignature = Signature.getInstance("SHA256withRSA");
-		privateSignature.initSign(pair.getPrivate());
-		privateSignature.update(plainText);
-
-		byte[] signature = privateSignature.sign();
-
-		return signature;
-	}
 
 	public boolean verify(byte[] plainText, byte[] signature, byte[] pubKey) throws Exception {
 		PublicKey publicKey = KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(pubKey));

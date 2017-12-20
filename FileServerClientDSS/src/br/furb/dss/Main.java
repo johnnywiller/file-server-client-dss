@@ -5,9 +5,9 @@ public class Main {
 	public static void main(String[] args) throws Exception {
 
 		ServerSocket server = new ServerSocket();
-		
+
 		ClientKeys keys = initiateSession(server);
-		
+
 		MessageEncryptor msgEncryptor = new MessageEncryptor(keys);
 
 		ListeningServer listening = new ListeningServer(server, msgEncryptor);

@@ -30,9 +30,8 @@ public class ClientSessionInitiation {
 
 		System.out.println("STARTING SESSION (Kex process)");
 
-		// request public key from user that we want to talk
 		byte[] pubKey = getServerPubKey();
-
+		
 		DHPublicKey publicKey;
 		KeyPair keyPair;
 		byte[] secret;
@@ -71,6 +70,8 @@ public class ClientSessionInitiation {
 
 	private byte[] getServerPubKey() {
 
+		
+		
 		return null;
 	}
 
